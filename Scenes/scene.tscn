@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyi4cc4gyfs8k"]
+
+[ext_resource type="Script" uid="uid://31lk5jpik1vi" path="res://Scripts/scene.gd" id="1_p2gut"]
+[ext_resource type="PackedScene" uid="uid://da24iue2smpxj" path="res://Scenes/character.tscn" id="2_x1h56"]
+
+[node name="MainScene" type="Node2D" node_paths=PackedStringArray("player")]
+script = ExtResource("1_p2gut")
+player = NodePath("CharacterBody2D")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_x1h56")]
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../CharacterBody2D")
+
+[node name="Camera2D" type="Camera2D" parent="RemoteTransform2D"]
