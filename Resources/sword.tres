@@ -4,7 +4,9 @@
 
 [resource]
 script = ExtResource("1_lwoh8")
+weapon_name = "Katana"
 damage = 10.0
 attack_range = 1.0
 attack_rate = 1.0
+sprite_texture = "res://Sprites/sword.png"
 metadata/_custom_type_script = "uid://bbk7eh3xhxdx"
