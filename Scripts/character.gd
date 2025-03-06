@@ -5,10 +5,12 @@ class_name Character
 @export var speed: float = 300.0
 signal attack_signal(direction: Vector2)
 
+var current_rotation: float = 0
+
 func _ready() -> void:
 	# Test code
 	var weapon: Weapon = preload("res://Scenes/weapon.tscn").instantiate()
-	$WeaponSlot.add_child(weapon)
+	$AnimatedSprite2D/WeaponSlot.add_child(weapon)
 	link_signals(weapon)
 
 func _physics_process(delta: float) -> void:
@@ -34,8 +36,14 @@ func handle_character_movement():
 	var y_direction: float = handle_vertical_input()
 	
 	move_character(x_direction, y_direction)
+	rotate_character_sprite(x_direction, y_direction)
 
-func move_character(x_direction, y_direction) -> void:
+func rotate_character_sprite(x_direction: float, y_direction: float):
+	if x_direction != 0 or y_direction != 0:
+		current_rotation = atan2(y_direction, x_direction) + (PI/2)
+		$AnimatedSprite2D.rotation = current_rotation
+
+func move_character(x_direction: float, y_direction: float) -> void:
 	var direction = Vector2(x_direction, y_direction)
 	if direction.length() > 1:
 		direction = direction.normalized()
